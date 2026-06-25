@@ -154,9 +154,19 @@ createBubbles('bubbles4', 60);
 
 let current = 0;
 const slides = document.querySelectorAll('.slide');
+const total = slides.length;
+
+// 自动轮播：每页8秒，循环播放
+function autoSlide() {
+  current = (current + 1) % total;
+  slides[current].scrollIntoView({ behavior: 'smooth' });
+}
+setInterval(autoSlide, 8000);
+
+// 键盘翻页（保留，手动也能用）
 document.addEventListener('keydown', (e) => {
   if (e.key === 'ArrowRight' || e.key === ' ') {
-    current = Math.min(current + 1, slides.length - 1);
+    current = Math.min(current + 1, total - 1);
     slides[current].scrollIntoView({ behavior: 'smooth' });
   }
   if (e.key === 'ArrowLeft') {
