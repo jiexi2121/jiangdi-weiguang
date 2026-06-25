@@ -153,24 +153,30 @@ createBubbles('bubbles3', 55);
 createBubbles('bubbles4', 60);
 
 let current = 0;
+let direction = 1; // 1=前进, -1=后退
 const slides = document.querySelectorAll('.slide');
 const total = slides.length;
 
-// 自动轮播：每页8秒，循环播放
+// 自动轮播：1→2→3→4→3→2→1→2→3→4... 来回循环
 function autoSlide() {
-  current = (current + 1) % total;
+  current += direction;
+  // 到两端时反转方向
+  if (current === total - 1) direction = -1;
+  if (current === 0) direction = 1;
   slides[current].scrollIntoView({ behavior: 'smooth' });
 }
 setInterval(autoSlide, 10000);
 
-// 键盘翻页（保留，手动也能用）
+// 键盘翻页（保留）
 document.addEventListener('keydown', (e) => {
   if (e.key === 'ArrowRight' || e.key === ' ') {
     current = Math.min(current + 1, total - 1);
+    direction = current === total - 1 ? -1 : 1;
     slides[current].scrollIntoView({ behavior: 'smooth' });
   }
   if (e.key === 'ArrowLeft') {
     current = Math.max(current - 1, 0);
+    direction = current === 0 ? 1 : -1;
     slides[current].scrollIntoView({ behavior: 'smooth' });
   }
 });
