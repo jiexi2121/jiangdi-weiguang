@@ -161,7 +161,7 @@ function autoSlide() {
   current = (current + 1) % total;
   slides[current].scrollIntoView({ behavior: 'smooth' });
 }
-setInterval(autoSlide, 8000);
+setInterval(autoSlide, 10000);
 
 // 键盘翻页（保留，手动也能用）
 document.addEventListener('keydown', (e) => {
