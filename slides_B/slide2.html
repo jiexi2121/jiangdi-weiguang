@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>引语B</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { width: 1920px; height: 1080px; overflow: hidden; font-family: 'Noto Sans CJK SC', sans-serif; background: radial-gradient(ellipse at 50% 80%, #061428 0%, #030c18 60%, #010610 100%); position: relative; }
+.surface-light { position: absolute; top: 0; left: 0; right: 0; height: 300px; opacity: 0.6; background: linear-gradient(180deg, rgba(40,120,200,0.08) 0%, rgba(30,90,160,0.04) 40%, transparent 100%); }
+.light-shaft { position: absolute; top: -10%; width: 180px; height: 60%; background: linear-gradient(180deg, rgba(100,180,255,0.12) 0%, rgba(80,150,255,0.06) 40%, transparent 100%); transform: perspective(800px) rotateX(30deg); animation: shaftFloat 10s ease-in-out infinite; opacity: 0.4; }
+.shaft1 { left: 30%; } .shaft2 { left: 58%; animation-delay: -3s; width: 220px; opacity: 0.3; }
+@keyframes shaftFloat { 0%,100% { transform: perspective(800px) rotateX(30deg) translateY(0); opacity: 0.4; } 50% { transform: perspective(800px) rotateX(30deg) translateY(30px); opacity: 0.7; } }
+.floater { position: absolute; border-radius: 50%; background: radial-gradient(circle, rgba(120,200,255,0.5), transparent); animation: floatSlow 22s linear infinite; }
+@keyframes floatSlow { 0% { transform: translate(0,0) scale(1); opacity: 0; } 10% { opacity: 0.9; } 50% { transform: translate(30px,-400px) scale(1.2); opacity: 0.7; } 90% { opacity: 0.3; } 100% { transform: translate(-20px,-1080px) scale(0.5); opacity: 0; } }
+.content { position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 10; padding: 80px; }
+.quote-text-b { font-size: 72px; font-weight: 700; color: #e8f4ff; text-shadow: 0 0 40px rgba(60,140,220,0.6), 0 4px 8px rgba(0,0,0,0.8); letter-spacing: 8px; text-align: center; line-height: 1.5; }
+.quote-author-b { font-size: 34px; font-weight: 300; color: rgba(120,190,255,0.75); letter-spacing: 3px; margin-top: 60px; }
+.speaker-tag-b { position: absolute; bottom: 60px; right: 80px; font-size: 22px; color: rgba(80,160,255,0.4); letter-spacing: 2px; z-index: 10; }
+.top-line-b { position: absolute; top: 50px; left: 8%; right: 8%; height: 1px; background: linear-gradient(90deg, transparent, rgba(60,140,220,0.3), transparent); z-index: 10; }
+.bottom-line-b { position: absolute; bottom: 50px; left: 8%; right: 8%; height: 1px; background: linear-gradient(90deg, transparent, rgba(60,140,220,0.5), rgba(100,180,255,0.7), rgba(60,140,220,0.5), transparent); z-index: 10; }
+</style>
+</head>
+<body>
+<div class="surface-light"></div>
+<div class="light-shaft shaft1"></div>
+<div class="light-shaft shaft2"></div>
+<script>for(let i=0;i<20;i++){ const f=document.createElement('div'); f.className='floater'; const s=Math.random()*5+2; f.style.cssText=`width:${s}px;height:${s}px;left:${Math.random()*100}%;top:${Math.random()*60+40}%;animation-duration:${Math.random()*20+15}s;animation-delay:${Math.random()*15}s;opacity:0`; document.body.appendChild(f); }</script>
+<div class="top-line-b"></div>
+<div class="content">
+  <div class="quote-text-b">「走，带你回家」</div>
+  <div class="quote-author-b">潜水员 王翼 · 十三米江底 · 黑暗中独自坚守数十分钟</div>
+</div>
+<div class="speaker-tag-b">龙虎网 张玲</div>
+<div class="bottom-line-b"></div>
+</body>
+</html>

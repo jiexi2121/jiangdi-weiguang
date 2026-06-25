@@ -8,7 +8,7 @@
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { background: #000; overflow: hidden; font-family: 'Noto Sans CJK SC', 'Microsoft YaHei', sans-serif; }
 
-  .slide { width: 100vw; height: 100vh; position: relative; overflow: hidden; }
+  .slide { width: 1920px; height: 1080px; position: relative; overflow: hidden; page-break-after: always; }
 
   #slide1 { background: linear-gradient(180deg, #0a1628 0%, #0d2137 30%, #0a1e3d 60%, #061020 100%); }
   #slide2 { background: linear-gradient(180deg, #061020 0%, #0a1e3d 40%, #0d2137 70%, #0a1628 100%); }
@@ -106,7 +106,7 @@
     <div class="body-text">
       五小时生死搜救<br>
       <span class="highlight">十三米</span>漆黑江底<br>
-      两名搜救人员以血肉之躯<br>
+      两名退伍军人以血肉之躯<br>
       守护生命最后的尊严
     </div>
   </div>
@@ -122,7 +122,7 @@
 
   <div class="content">
     <div class="end-text">追光的记录者</div>
-    <div class="end-sub">讲好有温度、有力量、有情怀的好故事</div>
+    <div class="end-sub">讲好有温度、有力量、有情怀的中国好故事</div>
   </div>
   <div class="speaker-tag">龙虎网 张玲</div>
   <div class="bottom-line"></div>
@@ -153,30 +153,14 @@ createBubbles('bubbles3', 55);
 createBubbles('bubbles4', 60);
 
 let current = 0;
-let direction = 1; // 1=前进, -1=后退
 const slides = document.querySelectorAll('.slide');
-const total = slides.length;
-
-// 自动轮播：1→2→3→4→3→2→1→2→3→4... 来回循环
-function autoSlide() {
-  current += direction;
-  // 到两端时反转方向
-  if (current === total - 1) direction = -1;
-  if (current === 0) direction = 1;
-  slides[current].scrollIntoView({ behavior: 'smooth' });
-}
-setInterval(autoSlide, 10000);
-
-// 键盘翻页（保留）
 document.addEventListener('keydown', (e) => {
   if (e.key === 'ArrowRight' || e.key === ' ') {
-    current = Math.min(current + 1, total - 1);
-    direction = current === total - 1 ? -1 : 1;
+    current = Math.min(current + 1, slides.length - 1);
     slides[current].scrollIntoView({ behavior: 'smooth' });
   }
   if (e.key === 'ArrowLeft') {
     current = Math.max(current - 1, 0);
-    direction = current === 0 ? 1 : -1;
     slides[current].scrollIntoView({ behavior: 'smooth' });
   }
 });

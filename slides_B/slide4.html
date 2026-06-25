@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>结尾B</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { width: 1920px; height: 1080px; overflow: hidden; font-family: 'Noto Sans CJK SC', sans-serif; background: radial-gradient(ellipse at 50% 110%, #0a1e35 0%, #060e20 50%, #020810 100%); position: relative; }
+.surface-light { position: absolute; top: 0; left: 0; right: 0; height: 300px; background: linear-gradient(180deg, rgba(40,120,200,0.1) 0%, rgba(30,90,160,0.05) 40%, transparent 100%); }
+.light-shaft { position: absolute; top: -10%; width: 180px; height: 60%; background: linear-gradient(180deg, rgba(100,180,255,0.14) 0%, rgba(80,150,255,0.07) 40%, transparent 100%); transform: perspective(800px) rotateX(30deg); animation: shaftFloat 10s ease-in-out infinite; }
+.shaft1 { left: 25%; } .shaft2 { left: 55%; animation-delay: -3s; width: 220px; } .shaft3 { left: 72%; animation-delay: -6s; width: 150px; opacity: 0.6; }
+@keyframes shaftFloat { 0%,100% { transform: perspective(800px) rotateX(30deg) translateY(0); opacity: 0.6; } 50% { transform: perspective(800px) rotateX(30deg) translateY(30px); opacity: 0.9; } }
+.floater { position: absolute; border-radius: 50%; background: radial-gradient(circle, rgba(120,200,255,0.65), transparent); animation: floatSlow 18s linear infinite; }
+@keyframes floatSlow { 0% { transform: translate(0,0) scale(1); opacity: 0; } 10% { opacity: 1; } 50% { transform: translate(30px,-400px) scale(1.2); opacity: 0.8; } 90% { opacity: 0.4; } 100% { transform: translate(-20px,-1080px) scale(0.5); opacity: 0; } }
+.glow-dot { position: absolute; border-radius: 50%; background: rgba(150,220,255,0.8); box-shadow: 0 0 6px rgba(100,180,255,0.6), 0 0 12px rgba(80,160,255,0.3); animation: glowPulse 4s ease-in-out infinite; }
+@keyframes glowPulse { 0%,100% { opacity: 0.3; transform: scale(1); } 50% { opacity: 1; transform: scale(1.5); } }
+.content { position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 10; padding: 80px; }
+.end-text-b { font-size: 84px; font-weight: 900; color: #e8f4ff; text-shadow: 0 0 60px rgba(60,140,220,0.6), 0 0 120px rgba(40,100,180,0.3); letter-spacing: 12px; }
+.end-sub-b { font-size: 40px; font-weight: 300; color: rgba(140,200,255,0.85); letter-spacing: 4px; margin-top: 60px; }
+.speaker-tag-b { position: absolute; bottom: 60px; right: 80px; font-size: 22px; color: rgba(80,160,255,0.4); letter-spacing: 2px; z-index: 10; }
+.top-line-b { position: absolute; top: 50px; left: 8%; right: 8%; height: 1px; background: linear-gradient(90deg, transparent, rgba(60,140,220,0.3), transparent); z-index: 10; }
+.bottom-line-b { position: absolute; bottom: 50px; left: 8%; right: 8%; height: 1px; background: linear-gradient(90deg, transparent, rgba(60,140,220,0.5), rgba(100,180,255,0.7), rgba(60,140,220,0.5), transparent); z-index: 10; }
+</style>
+</head>
+<body>
+<div class="surface-light"></div>
+<div class="light-shaft shaft1"></div>
+<div class="light-shaft shaft2"></div>
+<div class="light-shaft shaft3"></div>
+<script>
+for(let i=0;i<28;i++){ const f=document.createElement('div'); f.className='floater'; const s=Math.random()*6+2; f.style.cssText=`width:${s}px;height:${s}px;left:${Math.random()*100}%;top:${Math.random()*60+40}%;animation-duration:${Math.random()*20+15}s;animation-delay:${Math.random()*15}s;opacity:0`; document.body.appendChild(f); }
+for(let i=0;i<12;i++){ const d=document.createElement('div'); d.className='glow-dot'; const s=Math.random()*4+2; d.style.cssText=`width:${s}px;height:${s}px;left:${Math.random()*90+5}%;top:${Math.random()*80+10}%;animation-duration:${Math.random()*5+3}s;animation-delay:${Math.random()*5}s`; document.body.appendChild(d); }
+</script>
+<div class="top-line-b"></div>
+<div class="content">
+  <div class="end-text-b">愿永远做追光的记录者</div>
+  <div class="end-sub-b">脚下沾泥土，心中有光亮，肩上有担当</div>
+</div>
+<div class="speaker-tag-b">龙虎网 张玲</div>
+<div class="bottom-line-b"></div>
+</body>
+</html>
