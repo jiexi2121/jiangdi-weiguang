@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>江底微光 - 版本A</title>
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+  * { margin:0; padding:0; box-sizing: border-box; }
   body { background: #000; overflow: hidden; font-family: 'Noto Sans CJK SC', 'Microsoft YaHei', sans-serif; }
 
   .slide { width: 100vw; height: 100vh; position: relative; overflow: hidden; }
@@ -14,6 +14,7 @@
   #slide2 { background: linear-gradient(180deg, #061020 0%, #0a1e3d 40%, #0d2137 70%, #0a1628 100%); }
   #slide3 { background: linear-gradient(180deg, #0a1628 0%, #0d2540 35%, #0a1e3d 65%, #061020 100%); }
   #slide4 { background: linear-gradient(180deg, #061020 0%, #0a1e3d 50%, #0d2137 80%, #0a1628 100%); }
+  #slide5, #slide6, #slide7, #slide8, #slide9, #slide10 { background: #000; }
 
   .water-ripple {
     position: absolute; top: 0; left: 0; right: 0; bottom: 0;
@@ -31,7 +32,6 @@
   }
   @keyframes beamPulse { 0%,100% { opacity: 0.65; width: 320px; } 50% { opacity: 1; width: 370px; } }
 
-  /* 气泡 - 更小更细腻 */
   .bubble {
     position: absolute; border-radius: 50%;
     background: radial-gradient(circle at 35% 35%, rgba(180,220,255,0.6), rgba(80,160,240,0.25) 60%, transparent 100%);
@@ -45,8 +45,6 @@
     80% { opacity: 0.4; }
     100% { transform: translateY(-1080px) scale(0.3); opacity: 0; }
   }
-
-  /* 潜水员剪影 - 写实风格，往上游 */
 
   .content {
     position: absolute; top: 0; left: 0; right: 0; bottom: 0;
@@ -65,17 +63,46 @@
   .speaker-tag { position: absolute; bottom: 60px; right: 80px; font-size: 24px; color: rgba(100,180,255,0.5); letter-spacing: 2px; z-index: 10; }
   .bottom-line { position: absolute; bottom: 60px; left: 10%; right: 10%; height: 2px; background: linear-gradient(90deg, transparent, rgba(80,160,255,0.6), transparent); z-index: 10; }
   .nav-hint { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,0.4); font-size: 18px; z-index: 100; background: rgba(0,0,0,0.5); padding: 8px 24px; border-radius: 20px; }
+
+  .video-container {
+    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    display: flex; justify-content: center; align-items: center;
+    z-index: 5;
+  }
+  .video-container video {
+    width: 85vw;
+    height: 85vh;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 0 60px rgba(80,160,255,0.3);
+  }
+
+  /* 四宫格图片页 */
+  .grid-container {
+    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 8px;
+    padding: 40px;
+    z-index: 5;
+  }
+  .grid-container img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    border-radius: 6px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4), inset 0 0 0 1px rgba(255,255,255,0.08);
+    transition: transform 0.3s ease;
+  }
 </style>
 </head>
 <body>
 
-<!-- 幻灯片1：封面 -->
+<!-- 第1页：封面 -->
 <div class="slide" id="slide1">
   <div class="water-ripple"></div>
   <div class="light-beam"></div>
   <div class="bubbles" id="bubbles1"></div>
-
-
   <div class="corner-deco">龙虎网 张玲</div>
   <div class="content">
     <div class="main-title">江底一声<br>「带你回家」</div>
@@ -84,12 +111,23 @@
   <div class="bottom-line"></div>
 </div>
 
-<!-- 幻灯片2：引语 -->
+<!-- 第2页：视频1 -->
+<div class="slide" id="slide5">
+  <div class="light-beam"></div>
+  <div class="bubbles" id="bubbles5"></div>
+  <div class="video-container">
+    <video data-video-id="1" src="video4.mp4" muted playsinline controls>
+      您的浏览器不支持视频播放
+    </video>
+  </div>
+  <div class="speaker-tag">龙虎网 张玲</div>
+  <div class="bottom-line"></div>
+</div>
+
+<!-- 第3页：引语 -->
 <div class="slide" id="slide2">
   <div class="light-beam"></div>
   <div class="bubbles" id="bubbles2"></div>
-
-
   <div class="content">
     <div class="quote-text">「走，带你回家」</div>
     <div class="quote-author">—— 潜水员 王翼 · 十三米江底</div>
@@ -98,7 +136,20 @@
   <div class="bottom-line"></div>
 </div>
 
-<!-- 幻灯片3：核心 -->
+<!-- 第4页：视频2 -->
+<div class="slide" id="slide6">
+  <div class="light-beam"></div>
+  <div class="bubbles" id="bubbles6"></div>
+  <div class="video-container">
+    <video data-video-id="2" src="video2.mp4" muted playsinline controls>
+      您的浏览器不支持视频播放
+    </video>
+  </div>
+  <div class="speaker-tag">龙虎网 张玲</div>
+  <div class="bottom-line"></div>
+</div>
+
+<!-- 第5页：核心 -->
 <div class="slide" id="slide3">
   <div class="light-beam"></div>
   <div class="bubbles" id="bubbles3"></div>
@@ -114,12 +165,24 @@
   <div class="bottom-line"></div>
 </div>
 
-<!-- 幻灯片4：结尾 -->
+<!-- 第6页：视频3 -->
+<div class="slide" id="slide7">
+  <div class="light-beam"></div>
+  <div class="bubbles" id="bubbles7"></div>
+  <div class="video-container">
+    <video data-video-id="3" src="video3.mp4" muted playsinline controls>
+      您的浏览器不支持视频播放
+    </video>
+  </div>
+  <div class="speaker-tag">龙虎网 张玲</div>
+  <div class="bottom-line"></div>
+</div>
+
+<!-- 第7页：结尾 -->
 <div class="slide" id="slide4">
   <div class="water-ripple"></div>
   <div class="light-beam"></div>
   <div class="bubbles" id="bubbles4"></div>
-
   <div class="content">
     <div class="end-text">追光的记录者</div>
     <div class="end-sub">讲好有温度、有力量、有情怀的好故事</div>
@@ -128,7 +191,47 @@
   <div class="bottom-line"></div>
 </div>
 
+<!-- 第8页：视频4 -->
+<div class="slide" id="slide8">
+  <div class="light-beam"></div>
+  <div class="bubbles" id="bubbles8"></div>
+  <div class="video-container">
+    <video data-video-id="4" src="video1.mp4" muted playsinline controls>
+      您的浏览器不支持视频播放
+    </video>
+  </div>
+  <div class="speaker-tag">龙虎网 张玲</div>
+  <div class="bottom-line"></div>
+</div>
+
+<!-- 第9页：四宫格1 -->
+<div class="slide" id="slide9">
+  <div class="light-beam"></div>
+  <div class="bubbles" id="bubbles9"></div>
+  <div class="grid-container">
+    <img src="grid1_1.jpg" alt="采访照片1">
+    <img src="grid1_2.jpg" alt="采访照片2">
+    <img src="grid1_3.jpg" alt="采访照片3">
+    <img src="grid1_4.jpg" alt="采访照片4">
+  </div>
+  <div class="speaker-tag">龙虎网 张玲</div>
+</div>
+
+<!-- 第10页：四宫格2 -->
+<div class="slide" id="slide10">
+  <div class="light-beam"></div>
+  <div class="bubbles" id="bubbles10"></div>
+  <div class="grid-container">
+    <img src="grid2_1.jpg" alt="采访照片5">
+    <img src="grid2_2.jpg" alt="采访照片6">
+    <img src="grid2_3.jpg" alt="采访照片7">
+    <img src="grid2_4.jpg" alt="采访照片8">
+  </div>
+  <div class="speaker-tag">龙虎网 张玲</div>
+</div>
+
 <script>
+// ===== 气泡生成 =====
 function createBubbles(containerId, count) {
   const container = document.getElementById(containerId);
   if (!container) return;
@@ -146,39 +249,179 @@ function createBubbles(containerId, count) {
     container.appendChild(b);
   }
 }
-
 createBubbles('bubbles1', 55);
 createBubbles('bubbles2', 50);
 createBubbles('bubbles3', 55);
 createBubbles('bubbles4', 60);
+createBubbles('bubbles5', 50);
+createBubbles('bubbles6', 50);
+createBubbles('bubbles7', 50);
+createBubbles('bubbles8', 50);
+createBubbles('bubbles9', 40);
+createBubbles('bubbles10', 40);
 
-let current = 0;
-let direction = 1; // 1=前进, -1=后退
+// ===== 幻灯片状态 =====
 const slides = document.querySelectorAll('.slide');
-const total = slides.length;
+const total = slides.length; // 10
+let current = 0;
+let direction = 1;          // 1=前进 -1=后退
+let timer = null;            // 当前计时器
+let userNavigating = false;  // 用户是否正在手动翻页
 
-// 自动轮播：1→2→3→4→3→2→1→2→3→4... 来回循环
-function autoSlide() {
-  current += direction;
-  // 到两端时反转方向
-  if (current === total - 1) direction = -1;
-  if (current === 0) direction = 1;
-  slides[current].scrollIntoView({ behavior: 'smooth' });
+// 判断某页是否为视频页
+function isVideoSlide(index) {
+  const slide = slides[index];
+  return slide && slide.querySelector('video') !== null;
 }
-setInterval(autoSlide, 10000);
 
-// 键盘翻页（保留）
+// 获取视频时长（秒），如果还未加载完成返回 null
+function getVideoDuration(index) {
+  const video = slides[index].querySelector('video');
+  if (video && video.duration && isFinite(video.duration)) {
+    return video.duration * 1000; // 转毫秒
+  }
+  return null;
+}
+
+// 播放视频页的视频
+function playVideo(index) {
+  const video = slides[index].querySelector('video');
+  if (!video) return;
+  video.currentTime = 0;
+  video.play().catch(()=>{});
+}
+
+// 暂停视频
+function pauseVideo(index) {
+  const video = slides[index].querySelector('video');
+  if (video) { video.pause(); }
+}
+
+// 清除当前计时器
+function clearAdvanceTimer() {
+  if (timer) { clearTimeout(timer); timer = null; }
+}
+
+// 安排下一次自动切换
+function scheduleNext() {
+  clearAdvanceTimer();
+
+  const nextIndex = current + direction;
+
+  // 到达两端时反转方向
+  if (nextIndex >= total) {
+    direction = -1;
+  }
+  if (nextIndex < 0) {
+    direction = 1;
+  }
+
+  const targetIndex = current + direction;
+
+  if (isVideoSlide(current)) {
+    // 当前是视频页：视频播完后再切换
+    const video = slides[current].querySelector('video');
+    if (video) {
+      // 确保视频在播放
+      if (video.paused) video.play().catch(()=>{});
+      video.onended = () => {
+        advance();
+      };
+      // 备用：如果视频 duration 可用，也用 setTimeout 兜底
+      if (video.duration && isFinite(video.duration)) {
+        timer = setTimeout(advance, video.duration * 1000 + 500);
+      }
+    }
+  } else {
+    // 当前是文字页：10秒后切换
+    timer = setTimeout(advance, 10000);
+  }
+}
+
+// 执行切换
+function advance() {
+  clearAdvanceTimer();
+
+  let next = current + direction;
+
+  // 边界反转
+  if (next >= total) { direction = -1; next = current - 1; }
+  if (next < 0)     { direction = 1;  next = current + 1; }
+
+  // 离开当前页：暂停视频
+  if (isVideoSlide(current)) {
+    pauseVideo(current);
+    const v = slides[current].querySelector('video');
+    if (v) v.onended = null;
+  }
+
+  current = next;
+  slides[current].scrollIntoView({ behavior: 'smooth' });
+
+  // 进入新页：如果是视频页则播放
+  if (isVideoSlide(current)) {
+    // 等 scroll 动画结束后再播放
+    setTimeout(() => playVideo(current), 600);
+  }
+
+  // 安排下一次切换
+  setTimeout(scheduleNext, 800);
+}
+
+// 启动自动轮播
+setTimeout(scheduleNext, 10000);
+
+// ===== 键盘翻页 =====
 document.addEventListener('keydown', (e) => {
+  if (userNavigating) return;
+  userNavigating = true;
+
+  clearAdvanceTimer();
+  if (isVideoSlide(current)) {
+    pauseVideo(current);
+    const v = slides[current].querySelector('video');
+    if (v) v.onended = null;
+  }
+
   if (e.key === 'ArrowRight' || e.key === ' ') {
     current = Math.min(current + 1, total - 1);
     direction = current === total - 1 ? -1 : 1;
-    slides[current].scrollIntoView({ behavior: 'smooth' });
   }
   if (e.key === 'ArrowLeft') {
     current = Math.max(current - 1, 0);
     direction = current === 0 ? 1 : -1;
-    slides[current].scrollIntoView({ behavior: 'smooth' });
   }
+  // M键切换静音
+  if (e.key === 'm' || e.key === 'M') {
+    const video = slides[current].querySelector('video');
+    if (video) video.muted = !video.muted;
+    userNavigating = false;
+    return;
+  }
+
+  slides[current].scrollIntoView({ behavior: 'smooth' });
+
+  if (isVideoSlide(current)) {
+    setTimeout(() => playVideo(current), 600);
+  }
+
+  setTimeout(() => {
+    userNavigating = false;
+    scheduleNext();
+  }, 1200);
+});
+
+// ===== 视频元数据加载后重新安排计时 =====
+document.querySelectorAll('video').forEach(v => {
+  v.addEventListener('loadedmetadata', () => {
+    // 如果当前正好在这个视频页，重新安排计时
+    const slide = v.closest('.slide');
+    const idx = Array.from(slides).indexOf(slide);
+    if (idx === current && !userNavigating) {
+      clearAdvanceTimer();
+      timer = setTimeout(advance, v.duration * 1000 + 500);
+    }
+  });
 });
 </script>
 </body>
