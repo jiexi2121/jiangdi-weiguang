@@ -14,7 +14,8 @@
   #slide2 { background: linear-gradient(180deg, #061020 0%, #0a1e3d 40%, #0d2137 70%, #0a1628 100%); }
   #slide3 { background: linear-gradient(180deg, #0a1628 0%, #0d2540 35%, #0a1e3d 65%, #061020 100%); }
   #slide4 { background: linear-gradient(180deg, #061020 0%, #0a1e3d 50%, #0d2137 80%, #0a1628 100%); }
-  #slide5, #slide6, #slide7, #slide8, #slide9, #slide10 { background: #000; }
+  #slide5, #slide6, #slide7, #slide8, #slide9,
+  #slide10, #slide11, #slide12, #slide13, #slide14 { background: #000; }
 
   .water-ripple {
     position: absolute; top: 0; left: 0; right: 0; bottom: 0;
@@ -60,43 +61,128 @@
   .end-text { font-size: 80px; font-weight: 900; color: #ffffff; text-shadow: 0 0 50px rgba(80,160,255,0.7), 0 0 100px rgba(80,160,255,0.3); letter-spacing: 10px; }
   .end-sub { font-size: 38px; font-weight: 300; color: rgba(160,210,255,0.85); letter-spacing: 4px; margin-top: 50px; }
   .corner-deco { position: absolute; top: 40px; left: 50px; font-size: 22px; color: rgba(100,180,255,0.5); letter-spacing: 2px; z-index: 10; }
-  .speaker-tag { position: absolute; bottom: 60px; right: 80px; font-size: 24px; color: rgba(100,180,255,0.5); letter-spacing: 2px; z-index: 10; }
-  .bottom-line { position: absolute; bottom: 60px; left: 10%; right: 10%; height: 2px; background: linear-gradient(90deg, transparent, rgba(80,160,255,0.6), transparent); z-index: 10; }
-  .nav-hint { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,0.4); font-size: 18px; z-index: 100; background: rgba(0,0,0,0.5); padding: 8px 24px; border-radius: 20px; }
+  .speaker-tag { position: absolute; bottom: 40px; right: 80px; font-size: 24px; color: rgba(100,180,255,0.5); letter-spacing: 2px; z-index: 10; }
+  .video-caption { position: absolute; bottom: 100px; left: 0; right: 0; text-align: center; font-size: 36px; font-weight: 900; color: #ffffff; text-shadow: 0 2px 12px rgba(0,0,0,0.8), 0 0 30px rgba(80,160,255,0.6); letter-spacing: 3px; z-index: 10; }
+  .bottom-line { position: absolute; bottom: 40px; left: 10%; right: 10%; height: 2px; background: linear-gradient(90deg, transparent, rgba(80,160,255,0.6), transparent); z-index: 10; }
+  /* ===== 音乐控制按钮 ===== */
+  .music-btn {
+    position: fixed; top: 40px; right: 50px; z-index: 9999;
+    width: 48px; height: 48px; border-radius: 50%;
+    background: rgba(10,22,50,0.7); border: 1.5px solid rgba(80,160,255,0.5);
+    color: rgba(160,210,255,0.9); font-size: 22px;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    transition: all 0.3s; backdrop-filter: blur(6px);
+  }
+  .music-btn:hover { background: rgba(80,160,255,0.25); border-color: rgba(80,160,255,0.9); }
+  .music-btn.playing { animation: musicSpin 2s linear infinite; }
+  @keyframes musicSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
+  /* ===== 视频页 ===== */
   .video-container {
     position: absolute; top: 0; left: 0; right: 0; bottom: 0;
     display: flex; justify-content: center; align-items: center;
     z-index: 5;
   }
   .video-container video {
-    width: 85vw;
-    height: 85vh;
+    width: 85vw; height: 85vh;
     object-fit: contain;
     border-radius: 8px;
     box-shadow: 0 0 60px rgba(80,160,255,0.3);
   }
 
-  /* 四宫格图片页 */
+  /* ===== 双图并排（带文字说明） ===== */
+  .dual-container {
+    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    display: flex; gap: 20px;
+    padding: 32px 48px 80px 48px;
+    z-index: 5;
+  }
+  .dual-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .dual-item .img-wrap {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 8px;
+    background: #0a1628;
+  }
+  .dual-item.contain .img-wrap {
+    padding: 8px;
+  }
+  .dual-item.contain .img-wrap img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+  .dual-item.cover .img-wrap {
+    padding: 0;
+  }
+  .dual-item.cover .img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .dual-caption {
+    margin-top: 16px;
+    font-size: 36px;
+    font-weight: 700;
+    color: #ffffff;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.9), 0 0 20px rgba(80,160,255,0.5);
+    letter-spacing: 4px;
+    white-space: nowrap;
+  }
+
+  /* ===== 四宫格（带底部文字） ===== */
   .grid-container {
     position: absolute; top: 0; left: 0; right: 0; bottom: 0;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
-    gap: 8px;
-    padding: 40px;
+    gap: 6px;
+    padding: 24px 28px 76px 28px;
     z-index: 5;
   }
-  .grid-container img {
-    width: 100%; height: 100%;
-    object-fit: cover;
+  .grid-cell {
+    position: relative;
+    overflow: hidden;
     border-radius: 6px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.4), inset 0 0 0 1px rgba(255,255,255,0.08);
-    transition: transform 0.3s ease;
+    background: #0a1628;
+    display: flex;
+    flex-direction: column;
+  }
+  .grid-cell img {
+    flex: 1;
+    width: 100%;
+    min-height: 0;
+    object-fit: cover;
+  }
+  .grid-caption {
+    padding: 10px 8px 8px 8px;
+    text-align: center;
+    font-size: 22px;
+    font-weight: 700;
+    color: #ffffff;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.9), 0 0 16px rgba(80,160,255,0.4);
+    letter-spacing: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex-shrink: 0;
   }
 </style>
 </head>
 <body>
+<!-- 背景音乐 + 控制按钮 -->
+<audio id="bgm" src="bgm.mp3" loop preload="auto"></audio>
+<button class="music-btn" id="musicBtn" title="背景音乐">♪</button>
 
 <!-- 第1页：封面 -->
 <div class="slide" id="slide1">
@@ -116,9 +202,7 @@
   <div class="light-beam"></div>
   <div class="bubbles" id="bubbles5"></div>
   <div class="video-container">
-    <video data-video-id="1" src="video4.mp4" muted playsinline controls>
-      您的浏览器不支持视频播放
-    </video>
+    <video data-video-id="1" src="video4.mp4" muted playsinline controls>您的浏览器不支持视频播放</video>
   </div>
   <div class="speaker-tag">龙虎网 张玲</div>
   <div class="bottom-line"></div>
@@ -141,15 +225,67 @@
   <div class="light-beam"></div>
   <div class="bubbles" id="bubbles6"></div>
   <div class="video-container">
-    <video data-video-id="2" src="video2.mp4" muted playsinline controls>
-      您的浏览器不支持视频播放
-    </video>
+    <video data-video-id="2" src="video2.mp4" muted playsinline controls>您的浏览器不支持视频播放</video>
   </div>
   <div class="speaker-tag">龙虎网 张玲</div>
   <div class="bottom-line"></div>
 </div>
 
-<!-- 第5页：核心 -->
+<!-- 第5页：赵俊杰照片（图片+下方文字，图片缩小15%） -->
+<div class="slide" id="slide11">
+  <div class="light-beam"></div>
+  <div class="bubbles" id="bubbles11"></div>
+  <div style="position:absolute;top:0;left:0;right:0;bottom:120px;display:flex;align-items:center;justify-content:center;z-index:5;">
+    <img src="zhao1.png" alt="" style="width:72vw;height:72vh;object-fit:cover;border-radius:8px;box-shadow:0 0 60px rgba(80,160,255,0.3);">
+  </div>
+  <div style="position:absolute;bottom:70px;left:0;right:0;text-align:center;font-size:36px;font-weight:900;color:#ffffff;text-shadow:0 2px 12px rgba(0,0,0,0.8),0 0 30px rgba(80,160,255,0.6);letter-spacing:3px;z-index:10;">赵俊杰</div>
+  <div class="speaker-tag">龙虎网 张玲</div>
+  <div class="bottom-line"></div>
+</div>
+
+<!-- 第6页：王翼照片（cover+文字） -->
+<div class="slide" id="slide12">
+  <div class="light-beam"></div>
+  <div class="bubbles" id="bubbles12"></div>
+  <div class="dual-container">
+    <div class="dual-item cover">
+      <div class="img-wrap"><img src="wang1.jpg" alt=""></div>
+      <div class="dual-caption">王翼当兵时照片</div>
+    </div>
+    <div class="dual-item cover">
+      <div class="img-wrap"><img src="wang2.png" alt=""></div>
+      <div class="dual-caption">王翼下水前准备</div>
+    </div>
+  </div>
+  <div class="speaker-tag">龙虎网 张玲</div>
+</div>
+
+<!-- 第7页：鱼鹰队四宫格（带文字）★移到这里 -->
+<div class="slide" id="slide13">
+  <div class="light-beam"></div>
+  <div class="bubbles" id="bubbles13"></div>
+  <div class="grid-container">
+    <div class="grid-cell">
+      <img src="yuying1.png" alt="">
+      <div class="grid-caption">鱼鹰特勤队成员</div>
+    </div>
+    <div class="grid-cell">
+      <img src="yuying2.png" alt="">
+      <div class="grid-caption">鱼鹰特勤队日常训练</div>
+    </div>
+    <div class="grid-cell">
+      <img src="together1.png" alt="">
+      <div class="grid-caption">赵俊杰和王翼准备入水</div>
+    </div>
+    <div class="grid-cell">
+      <img src="together2.png" alt="">
+      <div class="grid-caption">赵俊杰协助王翼穿戴潜水装备</div>
+    </div>
+  </div>
+  <div class="speaker-tag">龙虎网 张玲</div>
+</div>
+
+<!-- 第8页：核心 -->
 <div class="slide" id="slide3">
   <div class="light-beam"></div>
   <div class="bubbles" id="bubbles3"></div>
@@ -165,20 +301,18 @@
   <div class="bottom-line"></div>
 </div>
 
-<!-- 第6页：视频3 -->
+<!-- 第9页：视频3 -->
 <div class="slide" id="slide7">
   <div class="light-beam"></div>
   <div class="bubbles" id="bubbles7"></div>
   <div class="video-container">
-    <video data-video-id="3" src="video3.mp4" muted playsinline controls>
-      您的浏览器不支持视频播放
-    </video>
+    <video data-video-id="3" src="video3.mp4" muted playsinline controls>您的浏览器不支持视频播放</video>
   </div>
   <div class="speaker-tag">龙虎网 张玲</div>
   <div class="bottom-line"></div>
 </div>
 
-<!-- 第7页：结尾 -->
+<!-- 第10页：结尾 -->
 <div class="slide" id="slide4">
   <div class="water-ripple"></div>
   <div class="light-beam"></div>
@@ -191,41 +325,39 @@
   <div class="bottom-line"></div>
 </div>
 
-<!-- 第8页：视频4 -->
+<!-- 第11页：视频4 -->
 <div class="slide" id="slide8">
   <div class="light-beam"></div>
   <div class="bubbles" id="bubbles8"></div>
   <div class="video-container">
-    <video data-video-id="4" src="video1.mp4" muted playsinline controls>
-      您的浏览器不支持视频播放
-    </video>
+    <video data-video-id="4" src="video1.mp4" muted playsinline controls>您的浏览器不支持视频播放</video>
   </div>
   <div class="speaker-tag">龙虎网 张玲</div>
   <div class="bottom-line"></div>
 </div>
 
-<!-- 第9页：四宫格1 -->
+<!-- 第12页：四宫格1（无文字） -->
 <div class="slide" id="slide9">
   <div class="light-beam"></div>
   <div class="bubbles" id="bubbles9"></div>
-  <div class="grid-container">
-    <img src="grid1_1.jpg" alt="采访照片1">
-    <img src="grid1_2.jpg" alt="采访照片2">
-    <img src="grid1_3.jpg" alt="采访照片3">
-    <img src="grid1_4.jpg" alt="采访照片4">
+  <div class="grid-container" style="padding-bottom: 32px;">
+    <div class="grid-cell"><img src="grid1_1.jpg" alt=""></div>
+    <div class="grid-cell"><img src="grid1_2.jpg" alt=""></div>
+    <div class="grid-cell"><img src="grid1_3.jpg" alt=""></div>
+    <div class="grid-cell"><img src="grid1_4.jpg" alt=""></div>
   </div>
   <div class="speaker-tag">龙虎网 张玲</div>
 </div>
 
-<!-- 第10页：四宫格2 -->
+<!-- 第13页：四宫格2（无文字） -->
 <div class="slide" id="slide10">
   <div class="light-beam"></div>
   <div class="bubbles" id="bubbles10"></div>
-  <div class="grid-container">
-    <img src="grid2_1.jpg" alt="采访照片5">
-    <img src="grid2_2.jpg" alt="采访照片6">
-    <img src="grid2_3.jpg" alt="采访照片7">
-    <img src="grid2_4.jpg" alt="采访照片8">
+  <div class="grid-container" style="padding-bottom: 32px;">
+    <div class="grid-cell"><img src="grid2_1.jpg" alt=""></div>
+    <div class="grid-cell"><img src="grid2_2.jpg" alt=""></div>
+    <div class="grid-cell"><img src="grid2_3.jpg" alt=""></div>
+    <div class="grid-cell"><img src="grid2_4.jpg" alt=""></div>
   </div>
   <div class="speaker-tag">龙虎网 张玲</div>
 </div>
@@ -259,31 +391,22 @@ createBubbles('bubbles7', 50);
 createBubbles('bubbles8', 50);
 createBubbles('bubbles9', 40);
 createBubbles('bubbles10', 40);
+createBubbles('bubbles11', 40);
+createBubbles('bubbles12', 40);
+createBubbles('bubbles13', 40);
 
 // ===== 幻灯片状态 =====
 const slides = document.querySelectorAll('.slide');
-const total = slides.length; // 10
+const total = slides.length; // 13
 let current = 0;
-let direction = 1;          // 1=前进 -1=后退
-let timer = null;            // 当前计时器
-let userNavigating = false;  // 用户是否正在手动翻页
+let direction = 1;
+let timer = null;
+let userNavigating = false;
 
-// 判断某页是否为视频页
 function isVideoSlide(index) {
-  const slide = slides[index];
-  return slide && slide.querySelector('video') !== null;
+  return slides[index] && slides[index].querySelector('video') !== null;
 }
 
-// 获取视频时长（秒），如果还未加载完成返回 null
-function getVideoDuration(index) {
-  const video = slides[index].querySelector('video');
-  if (video && video.duration && isFinite(video.duration)) {
-    return video.duration * 1000; // 转毫秒
-  }
-  return null;
-}
-
-// 播放视频页的视频
 function playVideo(index) {
   const video = slides[index].querySelector('video');
   if (!video) return;
@@ -291,64 +414,40 @@ function playVideo(index) {
   video.play().catch(()=>{});
 }
 
-// 暂停视频
 function pauseVideo(index) {
   const video = slides[index].querySelector('video');
   if (video) { video.pause(); }
 }
 
-// 清除当前计时器
 function clearAdvanceTimer() {
   if (timer) { clearTimeout(timer); timer = null; }
 }
 
-// 安排下一次自动切换
 function scheduleNext() {
   clearAdvanceTimer();
 
-  const nextIndex = current + direction;
-
-  // 到达两端时反转方向
-  if (nextIndex >= total) {
-    direction = -1;
-  }
-  if (nextIndex < 0) {
-    direction = 1;
-  }
-
-  const targetIndex = current + direction;
-
   if (isVideoSlide(current)) {
-    // 当前是视频页：视频播完后再切换
     const video = slides[current].querySelector('video');
     if (video) {
-      // 确保视频在播放
       if (video.paused) video.play().catch(()=>{});
-      video.onended = () => {
-        advance();
-      };
-      // 备用：如果视频 duration 可用，也用 setTimeout 兜底
+      video.onended = () => advance();
       if (video.duration && isFinite(video.duration)) {
         timer = setTimeout(advance, video.duration * 1000 + 500);
       }
     }
   } else {
-    // 当前是文字页：10秒后切换
     timer = setTimeout(advance, 10000);
   }
 }
 
-// 执行切换
 function advance() {
   clearAdvanceTimer();
 
   let next = current + direction;
 
-  // 边界反转
   if (next >= total) { direction = -1; next = current - 1; }
   if (next < 0)     { direction = 1;  next = current + 1; }
 
-  // 离开当前页：暂停视频
   if (isVideoSlide(current)) {
     pauseVideo(current);
     const v = slides[current].querySelector('video');
@@ -358,20 +457,15 @@ function advance() {
   current = next;
   slides[current].scrollIntoView({ behavior: 'smooth' });
 
-  // 进入新页：如果是视频页则播放
   if (isVideoSlide(current)) {
-    // 等 scroll 动画结束后再播放
     setTimeout(() => playVideo(current), 600);
   }
 
-  // 安排下一次切换
   setTimeout(scheduleNext, 800);
 }
 
-// 启动自动轮播
 setTimeout(scheduleNext, 10000);
 
-// ===== 键盘翻页 =====
 document.addEventListener('keydown', (e) => {
   if (userNavigating) return;
   userNavigating = true;
@@ -391,7 +485,6 @@ document.addEventListener('keydown', (e) => {
     current = Math.max(current - 1, 0);
     direction = current === 0 ? 1 : -1;
   }
-  // M键切换静音
   if (e.key === 'm' || e.key === 'M') {
     const video = slides[current].querySelector('video');
     if (video) video.muted = !video.muted;
@@ -411,10 +504,8 @@ document.addEventListener('keydown', (e) => {
   }, 1200);
 });
 
-// ===== 视频元数据加载后重新安排计时 =====
 document.querySelectorAll('video').forEach(v => {
   v.addEventListener('loadedmetadata', () => {
-    // 如果当前正好在这个视频页，重新安排计时
     const slide = v.closest('.slide');
     const idx = Array.from(slides).indexOf(slide);
     if (idx === current && !userNavigating) {
@@ -423,6 +514,45 @@ document.querySelectorAll('video').forEach(v => {
     }
   });
 });
+
+// ===== 背景音乐控制 =====
+const bgm = document.getElementById('bgm');
+const musicBtn = document.getElementById('musicBtn');
+let musicPlaying = false;
+
+function toggleMusic() {
+  if (musicPlaying) {
+    bgm.pause();
+    musicPlaying = false;
+    musicBtn.classList.remove('playing');
+    musicBtn.textContent = '♪';
+  } else {
+    bgm.play().then(() => {
+      musicPlaying = true;
+      musicBtn.classList.add('playing');
+      musicBtn.textContent = '♫';
+    }).catch(() => {
+      alert('点击页面任意位置后，音乐将自动播放');
+    });
+  }
+}
+
+musicBtn.addEventListener('click', toggleMusic);
+
+// 首次点击页面时自动尝试播放音乐
+let musicStarted = false;
+function tryPlayMusic() {
+  if (musicStarted) return;
+  musicStarted = true;
+  bgm.volume = 0.5;
+  bgm.play().then(() => {
+    musicPlaying = true;
+    musicBtn.classList.add('playing');
+    musicBtn.textContent = '♫';
+  }).catch(() => {});
+}
+document.addEventListener('click', tryPlayMusic, { once: true });
+document.addEventListener('touchstart', tryPlayMusic, { once: true });
 </script>
 </body>
 </html>
